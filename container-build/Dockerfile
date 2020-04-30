@@ -8,7 +8,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER docker
 RUN sudo apt-get update 
-RUN sudo apt-get install -y git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev build-essential gawk texinfo tree squashfs-tools libisoburn
+RUN sudo apt-get install -y git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev build-essential gawk texinfo tree squashfs-tools
 RUN sudo mkdir /output /output/toolchain /output/sources /output/files /output/patches /output/lfs
 RUN sudo chown -R docker /output
 ADD lfs-scripts /home/docker/scripts
