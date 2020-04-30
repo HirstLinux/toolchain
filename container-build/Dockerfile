@@ -10,8 +10,8 @@ USER docker
 RUN sudo apt-get update 
 RUN sudo apt-get install -y git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev build-essential gawk texinfo tree squashfs-tools
 RUN sudo mkdir -p /output/lfs
-RUN sudo chown -R docker /output
 ADD lfs-scripts /home/docker/scripts
+RUN sudo chown -R docker /output /home/docker/scripts
 WORKDIR /home/docker/scripts
 RUN bash version-check.sh
 RUN bash -x 01-toolchain
