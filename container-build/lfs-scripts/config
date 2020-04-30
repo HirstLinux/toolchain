@@ -3,14 +3,14 @@ MAKEFLAGS="-j$(nproc)"
 LFS="/output/lfs"
 LFS_TGT=$(uname -m)-hirstlinux-linux-gnu
 
-TCDIR=/output/toolchain
-SRCDIR=/output/sources
-PATCHDIR=/output/patches
-FILEDIR=/output/files
+TCDIR=$CWD/toolchain
+SRCDIR=$CWD/sources
+PATCHDIR=$CWD/patches
+FILEDIR=$CWD/files
 WORKDIR=/tmp
 
 LABEL=LFSLIVECD
-OUTPUT=lfs-livecd-$(date +"%Y%m%d")
+OUTPUT=hirstlinux-livecd-$(date +"%Y%m%d")
 WDIR=/output/lfsiso
 
 #MULTILIB=yes
