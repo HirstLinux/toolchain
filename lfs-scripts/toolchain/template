@@ -1,0 +1,10 @@
+name=
+version=
+source=()
+
+build() {
+	cd $name-$version
+	./configure --prefix=/tools
+	make
+	make install
+}

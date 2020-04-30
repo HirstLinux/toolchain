@@ -1,0 +1,27 @@
+name=binutils
+version=2.33.1
+source=(http://ftp.gnu.org/gnu/binutils/binutils-$version.tar.xz)
+
+build() {
+	if [ "$MULTILIB" = "yes" ]; then
+		multilibopt="--with-lib-path=/tools/lib:/tools/lib32"
+	else
+		multilibopt="--with-lib-path=/tools/lib"
+	fi
+
+	cd $name-$version
+
+	mkdir -v build
+	cd       build
+	
+	../configure $multilibopt \
+		--prefix=/tools \
+		--with-sysroot=$LFS \
+		--target=$LFS_TGT \
+		--disable-nls \
+		--disable-werror
+	make
+	mkdir -v /tools/lib && ln -sv lib /tools/lib64
+	[ "$MULTILIB" = "yes" ] && mkdir -p /tools/lib32
+	make install
+}
