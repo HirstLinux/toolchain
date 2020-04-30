@@ -13,4 +13,4 @@ RUN sudo mkdir /output
 RUN sudo chown -R docker /output
 ADD lfs-scripts /home/docker/scripts
 RUN cd /home/docker
-RUN /home/docker/scripts/version-check.sh
+RUN bash /home/docker/scripts/version-check.sh
