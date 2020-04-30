@@ -12,6 +12,6 @@ RUN sudo apt-get install -y git wget flex bison gperf python python-pip python-s
 RUN sudo mkdir /output
 RUN sudo chown -R docker /output
 ADD lfs-scripts /home/docker/scripts
-WORKDIR /home/docker
-RUN bash /home/docker/scripts/version-check.sh
-RUN bash /home/docker/scripts/01-toolchain
+WORKDIR /home/docker/scripts
+RUN bash version-check.sh
+RUN bash 01-toolchain
