@@ -14,3 +14,4 @@ RUN sudo chown -R docker /output
 ADD lfs-scripts /home/docker/scripts
 RUN cd /home/docker
 RUN bash /home/docker/scripts/version-check.sh
+RUN bash /home/docker/scripts/01-toolchain
