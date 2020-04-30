@@ -9,7 +9,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER docker
 
 RUN sudo apt-get update 
-RUN sudo apt-get install git -y
+RUN sudo apt-get install git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev build-essential -y
 COPY version-check.sh /
 RUN sudo chmod +x /version-check.sh
 RUN bash /version-check.sh
