@@ -1,16 +1,22 @@
 pipeline {
-  agent none
+  agent any
   stages {
-    stage("Build Toolchain") {
-      agent {
-        dockerfile {
-          filename "container-build/Dockerfile"
-          label "toolchain"
+    stage('Build Toolchain') {
+      steps {
+        script {
+          dir('container-build') {
+            def image = docker.build("toolchain:${env.BUILD_ID}")
+            image.inside('-v $WORKSPACE:/target -u root') {
+              sh "cd /output;tar -czvf toolchain-$(env.BUILD_ID).tar.gz lfs"
+            }
+          }
         }
       }
-      steps {
-        sh "tree /output/lfs"
-      }
+    }
+  }
+  post {
+    always {
+      archiveArtifacts "$WORKSPACE/*.tar.gz"
     }
   }
 }
