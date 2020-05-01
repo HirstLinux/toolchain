@@ -23,7 +23,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/container-build/Dockerfile'
         tags: |
           $(tag)
-    - task: Docker@2
+    - task: Docker@1
       displayName: Create archive from image
       imageName: $(tag)
       workingDirectory: /output
