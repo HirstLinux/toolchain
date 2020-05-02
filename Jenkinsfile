@@ -8,7 +8,9 @@ pipeline {
   stages {
     stage('Prepare docker workspace') {
       steps {
-        sh 'sudo mkdir -p /output/lfs /output/lfs/tools'
+        script {
+          sudo mkdir -p /output/lfs /output/lfs/tools
+        }
         sh 'git clone https://github.com/HirstLinux/toolchain.git /home/docker/scripts'
         sh 'cd /home/docker/scripts'
         sh 'version-check.sh'
