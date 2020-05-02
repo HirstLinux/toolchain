@@ -1,49 +1,41 @@
-def image
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'hirstlinux/utility-image:2'
+      args '-v $WORKSPACE:/output'
+      }
+    }
   stages {
-    stage('Build Docker Image') {
+    stage('Prepare docker workspace') {
       steps {
         script {
-          dir('container-build') {
-              image = docker.build("hirstlinux/toolchain-builder:${env.BUILD_ID}")
-          }
+          sh 'sudo mkdir -p /output/lfs /output/lfs/tools'
+          sh 'git clone https://github.com/HirstLinux/toolchain.git /home/docker/scripts'
+          sh 'cd /home/docker/scripts'
+          sh 'version-check.sh'
         }
       }
     }
     stage('Build Toolchain Stage 1') {
       steps {
         script {
-          image.inside {
-            sh "cd /home/docker/scripts"
-            sh "01-toolchain-pass1"
-          }
+          sh "cd /home/docker/scripts"
+          sh "01-toolchain-pass1"
         }
       }
     }
     stage('Build Toolchain Stage 2') {
       steps {
         script {
-          image.inside {
-            sh "cd /home/docker/scripts"
-            sh "01-toolchain-pass2"
-          }
-        }
-      }
-    }
-    stage('Collect Build Artifacts') {
-      steps {
-        script {
-          image.inside('-v $WORKSPACE:/target -u root') {
-            sh "cd /output;tar -czvf /target/toolchain-${env.BUILD_ID}.tar.gz lfs"
-          }
+          sh "cd /home/docker/scripts"
+          sh "01-toolchain-pass2"
         }
       }
     }
   }
   post {
     always {
-      archiveArtifacts "$WORKSPACE/*.tar.gz"
+      archiveArtifacts "$WORKSPACE/lfs"
     }
   }
 }
