@@ -14,11 +14,9 @@ pipeline {
     stage('Build Toolchain Stage 1') {
       steps {
         script {
-          dir('container-build') {
-            image.inside {
-              bash "cd /home/docker/scripts"
-              bash "01-toolchain-pass1"
-            }
+          image.inside {
+            bash "cd /home/docker/scripts"
+            bash "01-toolchain-pass1"
           }
         }
       }
@@ -26,11 +24,9 @@ pipeline {
     stage('Build Toolchain Stage 2') {
       steps {
         script {
-          dir('container-build') {
-            image.inside {
-              bash "cd /home/docker/scripts"
-              bash "01-toolchain-pass2"
-            }
+          image.inside {
+            bash "cd /home/docker/scripts"
+            bash "01-toolchain-pass2"
           }
         }
       }
@@ -38,10 +34,8 @@ pipeline {
     stage('Collect Build Artifacts') {
       steps {
         script {
-          dir('container-build') {
-            image.inside('-v $WORKSPACE:/target -u root') {
-              bash "cd /output;tar -czvf /target/toolchain-${env.BUILD_ID}.tar.gz lfs"
-            }
+          image.inside('-v $WORKSPACE:/target -u root') {
+            bash "cd /output;tar -czvf /target/toolchain-${env.BUILD_ID}.tar.gz lfs"
           }
         }
       }
