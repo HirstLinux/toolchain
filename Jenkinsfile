@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Build Toolchain Stage 1') {
       steps {
-        scripts {
+        script {
           dir('container-build') {
             image.inside('-v $WORKSPACE:/target -u root') {
               sh "cd /home/docker/scripts"
@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Build Toolchain Stage 2') {
       steps {
-        scripts {
+        script {
           dir('container-build') {
             image.inside('-v $WORKSPACE:/target -u root') {
               sh "cd /home/docker/scripts"
@@ -36,7 +36,7 @@ pipeline {
     }
     stage('Collect Build Artifacts') {
       steps {
-        scripts {
+        script {
           dir('container-build') {
             image.inside('-v $WORKSPACE:/target -u root') {
               sh "cd /output;tar -czvf /target/toolchain-${env.BUILD_ID}.tar.gz lfs"
