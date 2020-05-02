@@ -1,0 +1,12 @@
+name=fakeroot
+version=1.22
+source=(http://turul.canonical.com/pool/main/f/fakeroot/fakeroot_$version.orig.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/tools                 \
+            --libdir=/tools/lib/libfakeroot \
+            --with-ipc=sysv
+	make
+	make install
+}

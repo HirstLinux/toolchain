@@ -1,0 +1,10 @@
+name=libcap
+version=2.31
+source=(https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz)
+
+build() {
+	cd $name-$version
+	make
+	make RAISE_SETFCAP=no lib=lib prefix=/tools install
+	chmod -v 755 /tools/lib/libcap.so
+}

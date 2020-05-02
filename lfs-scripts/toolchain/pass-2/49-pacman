@@ -1,0 +1,14 @@
+name=pacman
+version=5.0.2
+source=(https://sources.archlinux.org/other/pacman/pacman-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/tools   \
+            --disable-doc     \
+            --disable-shared  \
+            --sysconfdir=/etc \
+            --localstatedir=/var
+	make
+	make install
+}
