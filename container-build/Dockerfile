@@ -6,6 +6,4 @@ RUN sudo ln -s /output/lfs/tools /tools
 RUN sudo chown -R docker /output /home/docker/scripts /tools
 WORKDIR /home/docker/scripts
 RUN bash version-check.sh
-RUN bash -x 01-toolchain
-RUN printf "==============\n--BUILD OUTPUT--\n"
-RUN tree /output
+CMD /bin/bash
