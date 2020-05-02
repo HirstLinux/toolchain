@@ -6,7 +6,7 @@ pipeline {
       steps {
         script {
           dir('container-build') {
-              image = docker.build("toolchain:${env.BUILD_ID}")
+              image = docker.build("hirstlinux/toolchain-builder:${env.BUILD_ID}")
           }
         }
       }

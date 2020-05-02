@@ -3,7 +3,7 @@ MAKEFLAGS="-j$(nproc)"
 LFS="/output/lfs"
 LFS_TGT=$(uname -m)-hirstlinux-linux-gnu
 
-TCDIR1=$CWD/toolchain/pass-1
+TCDIR1=$CWD/toolchain
 TCDIR2=$CWD/toolchain/pass-2
 SRCDIR=$CWD/sources
 PATCHDIR=$CWD/patches
