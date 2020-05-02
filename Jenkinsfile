@@ -8,28 +8,20 @@ pipeline {
   stages {
     stage('Prepare docker workspace') {
       steps {
-        script {
-          sh 'sudo mkdir -p /output/lfs /output/lfs/tools'
-          sh 'git clone https://github.com/HirstLinux/toolchain.git /home/docker/scripts'
-          sh 'cd /home/docker/scripts'
-          sh 'version-check.sh'
-        }
+        sh 'sudo mkdir -p /output/lfs /output/lfs/tools'
+        sh 'git clone https://github.com/HirstLinux/toolchain.git /home/docker/scripts'
+        sh 'cd /home/docker/scripts'
+        sh 'version-check.sh'
       }
     }
     stage('Build Toolchain Stage 1') {
       steps {
-        script {
-          sh "cd /home/docker/scripts"
-          sh "01-toolchain-pass1"
-        }
+        sh "cd /home/docker/scripts;./01-toolchain-pass1"
       }
     }
     stage('Build Toolchain Stage 2') {
       steps {
-        script {
-          sh "cd /home/docker/scripts"
-          sh "01-toolchain-pass2"
-        }
+        sh "cd /home/docker/scripts;./01-toolchain-pass2"
       }
     }
   }
