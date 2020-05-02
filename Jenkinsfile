@@ -15,8 +15,8 @@ pipeline {
       steps {
         script {
           dir('container-build') {
-            image.inside('-v $WORKSPACE:/target -u root') {
-              sh "cd /home/docker/scripts"
+            image.inside {
+              bash "cd /home/docker/scripts"
               bash "01-toolchain-pass1"
             }
           }
@@ -27,8 +27,8 @@ pipeline {
       steps {
         script {
           dir('container-build') {
-            image.inside('-v $WORKSPACE:/target -u root') {
-              sh "cd /home/docker/scripts"
+            image.inside {
+              bash "cd /home/docker/scripts"
               bash "01-toolchain-pass2"
             }
           }
@@ -40,7 +40,7 @@ pipeline {
         script {
           dir('container-build') {
             image.inside('-v $WORKSPACE:/target -u root') {
-              sh "cd /output;tar -czvf /target/toolchain-${env.BUILD_ID}.tar.gz lfs"
+              bash "cd /output;tar -czvf /target/toolchain-${env.BUILD_ID}.tar.gz lfs"
             }
           }
         }
