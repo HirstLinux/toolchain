@@ -1,3 +1,4 @@
+def image
 pipeline {
   agent any
   stages {
@@ -5,7 +6,7 @@ pipeline {
       steps {
         script {
           dir('container-build') {
-            def image = docker.build("toolchain:${env.BUILD_ID}")
+              image = docker.build("toolchain:${env.BUILD_ID}")
           }
         }
       }
