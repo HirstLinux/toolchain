@@ -18,11 +18,13 @@ pipeline {
     }
     stage('Build Toolchain Stage 1') {
       steps {
+        sh 'echo null'
         //sh "cd /home/docker/scripts;./01-toolchain-pass1"
       }
     }
     stage('Build Toolchain Stage 2') {
       steps {
+        sh 'echo null'
         //sh "cd /home/docker/scripts;./01-toolchain-pass2"
       }
     }
