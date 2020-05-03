@@ -2,7 +2,7 @@
 
 fetch() {	
 	tarballname=$(echo $1 | rev | cut -d / -f 1 | rev)
-	WGETCMD="wget --passive-ftp --secure-protocol=TLSv1 --timeout=10 --tries=3 --waitretry=3 --retry-connrefused --output-document=$2/$tarballname.partial"
+	WGETCMD="wget --passive-ftp --timeout=10 --tries=3 --waitretry=3 --retry-connrefused --output-document=$2/$tarballname.partial"
 	WGETRESUME="-c"
 	
 	if [ -f $2/$tarballname ]; then
