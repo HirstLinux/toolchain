@@ -25,7 +25,7 @@ pipeline {
   }
   post {
     always {
-      archiveArtifacts "lfs/**/*.*"
+      archiveArtifacts "lfs/tools/**/*.*"
     }
   }
 }
