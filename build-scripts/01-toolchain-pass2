@@ -2,7 +2,7 @@
 
 fetch() {	
 	tarballname=$(echo $1 | rev | cut -d / -f 1 | rev)
-	WGETCMD="wget --secure-protocol tlsv1 --no-check-certificate --passive-ftp --timeout=10 --tries=3 --waitretry=3 --retry-connrefused --output-document=$2/$tarballname.partial"
+	WGETCMD="wget --secure-protocol tlsv1 --passive-ftp --timeout=10 --tries=3 --waitretry=3 --retry-connrefused --output-document=$2/$tarballname.partial"
 	WGETRESUME="-c"
 	
 	if [ -f $2/$tarballname ]; then
@@ -120,6 +120,8 @@ PATH=/tools/bin:/bin:/usr/bin
 export LC_ALL=C PATH MAKEFLAGS LFS LFS_TGT
 
 mkdir -p $TCDIR2 $SRCDIR $WORKDIR
+
+sudo /usr/sbin/update-ca-certificates --fresh
 
 if [ ! -d $LFS/tools ]; then
 	sudo mkdir -pv $LFS/tools
