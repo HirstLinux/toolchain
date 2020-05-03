@@ -2,7 +2,7 @@
 
 fetch() {	
 	tarballname=$(echo $1 | rev | cut -d / -f 1 | rev)
-	WGETCMD="wget --passive-ftp --tries=3 --waitretry=3 --output-document=$2/$tarballname.partial"
+	WGETCMD="wget --passive-ftp --tries=20 --waitretry=5 --retry-connrefused --output-document=$2/$tarballname.partial"
 	WGETRESUME="-c"
 	
 	if [ -f $2/$tarballname ]; then
@@ -80,16 +80,25 @@ checkdone() {
 	fi
 }
 
-build_stage1() {
+fetch_stage1() {
 	cd $CWD
 	source $1 || exit 1
 	fetch_src
+	unset source name version build
+}	
+
+build_stage1() {
+	cd $CWD
+	source $1 || exit 1
 	extract_src
 	build_src
 	unset source name version build
 }	
 
 main() {
+	for script in $TCDIR1/[0-9][0-9]-*; do
+		fetch_stage1 $script
+	done
 	for script in $TCDIR1/[0-9][0-9]-*; do
 		checkdone || continue
 		build_stage1 $script
