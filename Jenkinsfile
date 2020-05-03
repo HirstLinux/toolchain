@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'hirstlinux/utility-image:2'
+      image 'hirstlinux/utility-image:3'
       }
     }
   stages {
