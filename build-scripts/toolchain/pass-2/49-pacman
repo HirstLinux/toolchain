@@ -7,7 +7,7 @@ build() {
 	./configure --prefix=/tools   \
             --disable-doc     \
             --disable-shared  \
-            --sysconfdir=/etc \
+            --sysconfdir=/tools/etc \
             --localstatedir=/var
 	make
 	make install
