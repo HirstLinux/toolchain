@@ -103,7 +103,7 @@ main() {
 		checkdone || continue
 		build_stage1 $script
 	done
-	sudo chown -Rv 0:0 $LFS
+	#sudo chown -Rv 0:0 $LFS
 }
 
 if [ $(id -u) = 0 ]; then
