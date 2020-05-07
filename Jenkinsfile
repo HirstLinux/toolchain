@@ -29,6 +29,7 @@ pipeline {
       }
     }
     stage('Build Docker Image') {
+      agent node
       steps {
         dir("docker-build") {
           script{
