@@ -31,10 +31,12 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         dir("docker-build") {
-          docker.withRegistry('https://registry.hub.docker.com', 'hirstlinux-docker') {
-            def tcImage = docker.build("hirstlinux/toolchain:${env.BUILD_ID}")
-            tcImage.push()
-            tcImage.push('latest')
+          script{
+            docker.withRegistry('https://registry.hub.docker.com', 'hirstlinux-docker') {
+              def tcImage = docker.build("hirstlinux/toolchain:${env.BUILD_ID}")
+              tcImage.push()
+              tcImage.push('latest')
+            }
           }
         }
       }
