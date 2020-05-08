@@ -28,7 +28,7 @@ pipeline {
         stage('Archive rootfs') {
           steps {
             sh 'echo null'
-            sh "sudo chown -R root:root lfs/tools;cd lfs/tools;sudo rm -rf ./[0-9]*;sudo tar -czpvf ../../docker-build/toolchain.tgz ./*"
+            sh "sudo chown -R root:root $WORKSPACE/lfs/tools;cd $WORKSPACE/lfs/tools;sudo rm -rf ./[0-9]*;sudo tar -czpvf $WORKSPACE/docker-build/toolchain.tgz ./*"
           }
         }
       }
